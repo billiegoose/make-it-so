@@ -1,0 +1,4 @@
+# Make it so! --Jean-luc Picard
+comment = 'Functions for applying declarative schema descriptions'
+default_version = '1.0'
+relocatable = true
