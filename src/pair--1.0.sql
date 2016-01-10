@@ -1,0 +1,21 @@
+-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use "CREATE EXTENSION pair" to load this file. \quit
+
+CREATE TYPE pair AS ( k text, v text );
+
+CREATE OR REPLACE FUNCTION pair(anyelement, text)
+RETURNS pair LANGUAGE SQL AS 'SELECT ROW($1, $2)::pair';
+
+CREATE OR REPLACE FUNCTION pair(text, anyelement)
+RETURNS pair LANGUAGE SQL AS 'SELECT ROW($1, $2)::pair';
+
+CREATE OR REPLACE FUNCTION pair(anyelement, anyelement)
+RETURNS pair LANGUAGE SQL AS 'SELECT ROW($1, $2)::pair';
+
+CREATE OR REPLACE FUNCTION pair(text, text)
+RETURNS pair LANGUAGE SQL AS 'SELECT ROW($1, $2)::pair;';
+
+CREATE OPERATOR ~> (LEFTARG = text, RIGHTARG = anyelement, PROCEDURE = pair);
+CREATE OPERATOR ~> (LEFTARG = anyelement, RIGHTARG = text, PROCEDURE = pair);
+CREATE OPERATOR ~> (LEFTARG = anyelement, RIGHTARG = anyelement, PROCEDURE = pair);
+CREATE OPERATOR ~> (LEFTARG = text, RIGHTARG = text, PROCEDURE = pair);
