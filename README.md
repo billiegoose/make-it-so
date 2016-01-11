@@ -28,6 +28,7 @@ make_table_so(data json)
     - name::String
 
 The _inventory table:
+
 |          | uuid | name | oid |
 |----------|:----:|:----:|:---:|
 | JSON     |  ☑  |  ☑  |  ☐  |
