@@ -19,6 +19,20 @@ as a bona-fide Postgresql extension.
 make_table(name text)
 - Ensure a table of that name exists. Will destroy views and materialized views in its way, but not indexes, TOAST tables, etc.
 
+make_column(tbl text, col text, typ text)
+- Ensure tbl.col exists. (Currently doesn't check type.) If not, creates it of type typ.
+
+make_table_so(data json)
+- Create / rename / track previously untracked table. Current values supported: 
+    - uuid::String
+    - name::String
+
+The _inventory table:
+|          | uuid | name | oid |
+|----------|:----:|:----:|:---:|
+| JSON     |  ☑  |  ☑  |  ☐  |
+| Postgres |  ☐  |  ☑  |  ☑  |
+
 ## Future functions:
  
 make_it_so(definitions json)
